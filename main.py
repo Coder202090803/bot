@@ -37,18 +37,18 @@ from database import (
 load_dotenv()
 keep_alive()
 
-API_TOKEN = os.getenv("API_TOKEN")
+API_TOKEN = ("8475786601:AAEyr8pRJ7qlrw2O5qjvt9gxtfs2zM-mtWw")
 CHANNELS = []
 LINKS = []
 MAIN_CHANNELS = []
 MAIN_LINKS = []
-BOT_USERNAME = os.getenv("BOT_USERNAME")
+BOT_USERNAME = ("AniVerseDubbingBot")
 
 bot = Bot(token=API_TOKEN)
 storage = MemoryStorage()
 dp = Dispatcher(bot, storage=storage)
 
-START_ADMINS = [6486825926, 7346481297]  # dastlabki adminlar
+START_ADMINS = [6486825926]  # dastlabki adminlar
 ADMINS = set(START_ADMINS)
 
 # === KEYBOARDS ===
