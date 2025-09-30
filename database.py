@@ -1,11 +1,14 @@
 import asyncpg
-import os
 import json
 import asyncio
-from dotenv import load_dotenv
 from datetime import date
 
-load_dotenv()
+# === PostgreSQL sozlamalari (kod ichida) ===
+DB_USER = "postgres"
+DB_PASSWORD = "postgres"
+DB_NAME = "kanal_zayafka"
+DB_HOST = "localhost"   # VPS’da postgres o‘zi ishlayotgan bo‘lsa "localhost" qoldiring
+DB_PORT = "5432"
 
 db_pool: asyncpg.pool.Pool | None = None
 
@@ -20,8 +23,11 @@ async def init_db(retries: int = 5, delay: int = 2):
     for i in range(retries):
         try:
             db_pool = await asyncpg.create_pool(
-                dsn=os.getenv("DATABASE_URL"),
-                ssl="require",
+                user=DB_USER,
+                password=DB_PASSWORD,
+                database=DB_NAME,
+                host=DB_HOST,
+                port=DB_PORT,
                 statement_cache_size=0
             )
             async with db_pool.acquire() as conn:
